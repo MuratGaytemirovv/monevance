@@ -10,8 +10,8 @@ def index(request):
 
 
 def add_category(request):
-    pass
+    return render(request, "dashboard/add_categories.html")
 
 
 def add_transactions(request):
-    pass
+    return render(request, "dashboard/add_transactions.html")
