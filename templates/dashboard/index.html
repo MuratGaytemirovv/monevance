@@ -10,15 +10,12 @@
         {{category.title}}
       </div>
       <div class="card-body">
-        <h5 class="card-title">Pass</h5>
-        <p class="card-text">Pass</p>
         <a href="{% url 'category_detail' pk=category.id %}" class="btn btn-primary">More Information</a>
       </div>
     </div>
     <br>
-
-
     
+
     {% endfor %}
     <br><br>
     <button>Download Report</button>

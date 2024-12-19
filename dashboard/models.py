@@ -42,3 +42,6 @@ class Income(models.Model):
         User, on_delete=models.CASCADE, verbose_name="Income author"
     )
     total = models.PositiveIntegerField("Total income")
+
+    def __str__(self):
+        return self.title

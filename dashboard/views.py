@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpRequest
-from .models import Category, Expense
+from django.shortcuts import render
+from django.db.models import Sum
+from django.http import HttpResponse
+from .models import Category, Expense, Income
 from django.views.generic import ListView, DetailView, CreateView, DeleteView
 from django.urls import reverse_lazy
 
@@ -34,6 +35,15 @@ class CategoryDetailView(DetailView):
     model = Category
     template_name = "dashboard/detail.html"
 
+    def get_context_data(self, **kwargs):
+
+        context = super().get_context_data(**kwargs)
+        incomes = Income.objects.filter(category_id=self.object.id)
+        expenses = Expense.objects.filter(category_id=self.object.id)
+        context["incomes"] = incomes
+        context["expenses"] = expenses
+        return context
+
 
 class CategoryCreateView(CreateView):
     model = Category
@@ -51,3 +61,25 @@ class CategoryDeleteView(DeleteView):
     template_name = "dashboard/confirm_delete_category.html"
     fields = ("title",)
     success_url = reverse_lazy("category_list")
+
+
+class IncomeCreateView(CreateView):
+    model = Income
+    fields = ("title", "category", "total")
+    template_name = "dashboard/add_income.html"
+    success_url = reverse_lazy("category_list")
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+
+class ExpenseCreateView(CreateView):
+    model = Expense
+    fields = ("title", "category", "total")
+    template_name = "dashboard/add_expense.html"
+    success_url = reverse_lazy("category_list")
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
