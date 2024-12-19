@@ -2,7 +2,7 @@
 
 {% block main %}
 
-{% for category in categories %}
+{% for category in  object_list %}
 
     <br>
     <div class="card">
@@ -12,9 +12,14 @@
       <div class="card-body">
         <h5 class="card-title">Pass</h5>
         <p class="card-text">Pass</p>
-        <a href="" class="btn btn-primary">Читать</a>
+        <a href="{% url 'category_detail' pk=category.id %}" class="btn btn-primary">More Information</a>
       </div>
     </div>
     <br>
+
+
+    
     {% endfor %}
+    <br><br>
+    <button>Download Report</button>
     {% endblock %}

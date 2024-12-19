@@ -13,6 +13,7 @@ class Category(models.Model):
 
 
 class Expense(models.Model):
+    # TODO: add created_at_field
     title = models.CharField("Title", max_length=255)
     category = models.ForeignKey(
         Category,
