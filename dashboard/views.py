@@ -58,8 +58,22 @@ class CategoryCreateView(CreateView):
 
 class CategoryDeleteView(DeleteView):
     model = Category
-    template_name = "dashboard/confirm_delete_category.html"
+    template_name = "dashboard/confirm_delete.html"
     fields = ("title",)
+    success_url = reverse_lazy("category_list")
+
+
+class IncomeDeleteView(DeleteView):
+    model = Income
+    template_name = "dashboard/confirm_delete.html"
+    fields = ("title", "category", "total")
+    success_url = reverse_lazy("category_list")
+
+
+class ExpenseDeleteView(DeleteView):
+    model = Expense
+    template_name = "dashboard/confirm_delete.html"
+    fields = ("title", "category", "total")
     success_url = reverse_lazy("category_list")
 
 

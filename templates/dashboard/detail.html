@@ -16,7 +16,8 @@
         {% for income in  incomes %}
         <div class="card-body d-flex align-items-center">
             <h5 class="card-title mb-0">{{ income.title }}</h5>
-            <p class="card-text mb-0 ms-3"> {{ income.total }} </p>
+            <p class="card-text mb-0 ms-3 me-3"> {{ income.total }} </p>
+            <a href="{% url 'income_delete_view' pk=income.id %}" class="btn btn-primary">Delete</a>
         </div>
         {% endfor %}
         
@@ -26,7 +27,8 @@
         {% for expense in  expenses %}
         <div class="card-body d-flex align-items-center">
             <h5 class="card-title mb-0"> {{ expense.title }} </h5>
-            <p class="card-text mb-0 ms-3">{{ expense.total }}</p>
+            <p class="card-text mb-0 ms-3 me-3">{{ expense.total }}</p>
+            <a href="{% url 'expense_delete_view' pk=expense.id %}" class="btn btn-primary">Delete</a>
         </div>
         
         {% endfor %}
