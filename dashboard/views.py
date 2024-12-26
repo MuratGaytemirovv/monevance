@@ -1,5 +1,3 @@
-from django.shortcuts import render
-from django.db.models import Sum
 from django.http import HttpResponse
 from .models import Category, Expense, Income
 from django.views.generic import ListView, DetailView, CreateView, DeleteView
@@ -15,17 +13,11 @@ def download_report(request):
     with open(file_name, encoding="utf-8") as f:
         data = f.read()
     response = HttpResponse(data, content_type="text/plain")
-    if response.status_code == 200:
-        response["Content-Disposition"] = f'attachment; filename="{file_name}"'
-        return response
-
-
-def add_transactions(request):
-    return render(request, "dashboard/add_transactions.html")
+    response["Content-Disposition"] = f'attachment; filename="{file_name}"'
+    return response
 
 
 class CategoryListView(LoginRequiredMixin, ListView):
-    model = Category
     template_name = "dashboard/index.html"
 
     def get_queryset(self):
