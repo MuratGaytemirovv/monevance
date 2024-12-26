@@ -2,10 +2,22 @@
 
 {% block main %}
 
+{{user}} 
+{% if request.user.is_authenticated %}
+  <form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Log out</button>
+  </form>
+{% else %} 
+   <a href="{% url 'login '%}" class="btn btn-primary">Log in</a> 
+{% endif %}
+
+    <h1>Categories</h1>
 {% for category in  object_list %}
 
     <br>
     <div class="card">
+      
       <div class="card-header">
         {{category.title}}
       </div>

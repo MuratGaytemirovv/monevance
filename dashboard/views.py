@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from .models import Category, Expense, Income
 from django.views.generic import ListView, DetailView, CreateView, DeleteView
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def download_report(request):
@@ -23,7 +24,7 @@ def add_transactions(request):
     return render(request, "dashboard/add_transactions.html")
 
 
-class CategoryListView(ListView):
+class CategoryListView(LoginRequiredMixin, ListView):
     model = Category
     template_name = "dashboard/index.html"
 
