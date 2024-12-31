@@ -19,7 +19,7 @@ class Category(models.Model):
 
 
 class Expense(models.Model):
-    # TODO: add created_at_field
+    created_at = models.DateTimeField(auto_now_add=True)
     title = models.CharField("Title", max_length=255)
     category = models.ForeignKey(
         Category,
@@ -37,6 +37,7 @@ class Expense(models.Model):
 
 
 class Income(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
     title = models.CharField("Title", max_length=255)
     category = models.ForeignKey(
         Category,

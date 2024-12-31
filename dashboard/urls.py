@@ -18,14 +18,18 @@ urlpatterns = [
     path("", home, name="home"),
     path(
         "category_list",
-        cache_page(60)(CategoryListView.as_view()),
+        cache_page(60 * 5)(CategoryListView.as_view()),
         name="category_list",
     ),
     path("add_category/", CategoryCreateView.as_view(), name="add_category"),
     path("download_report", download_report, name="download_report"),
     path("add_income/", IncomeCreateView.as_view(), name="add_income"),
     path("add_expense/", ExpenseCreateView.as_view(), name="add_expense"),
-    path("<int:pk>", CategoryDetailView.as_view(), name="category_detail"),
+    path(
+        "<int:pk>",
+        cache_page(60 * 5)(CategoryDetailView.as_view()),
+        name="category_detail",
+    ),
     path("<int:pk>/delete", CategoryDeleteView.as_view(), name="category_delete_view"),
     path(
         "<int:pk>/delete_income", IncomeDeleteView.as_view(), name="income_delete_view"
